@@ -10,7 +10,7 @@ export class UsersController {
 	createUser(@Body() body: CreateUserDto) {
 		this.usersService.create(body.email, body.password)
 	}
-	// .....
+	// ........
 	// @Get('/:id')
 	// findUser(@Param('id') id: string) {
 	// 	return this.usersService.findOne(parseInt(id))
