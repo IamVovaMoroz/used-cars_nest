@@ -1,9 +1,13 @@
-import { Body, Controller, Post, Get, Patch, Param, Query, Delete, NotFoundException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import { Body, Controller, Post, Get, Patch, Param, Query, Delete, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
+// import { SerializeInterceptort } from './interceptors/serialize.interceptor';
+import { Serialize } from './interceptors/serialize.interceptor';
+import { UserDto } from './dtos/user.dto';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
 	constructor(private usersService: UsersService) { }
 	@Post('/signup')
@@ -15,9 +19,14 @@ export class UsersController {
 	// findUser(@Param('id') id: string) {
 	// 	return this.usersService.findOne(parseInt(id))
 	// }
-	@UseInterceptors(ClassSerializerInterceptor)
+	// @UseInterceptors(ClassSerializerInterceptor)
+
+	// @UseInterceptors(new SerializeInterceptort(UserDto))
+	// we use decorator for that - short code now
+	// @Serialize(UserDto)
 	@Get('/:id')
 	async findUser(@Param('id') id: string) {
+		console.log('handler is running')
 		const user = await this.usersService.findOne(parseInt(id));
 		if (!user) {
 			throw new NotFoundException('user not found')
