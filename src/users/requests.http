@@ -39,3 +39,10 @@ PATCH  http://localhost:3000/auth/4
 Content-Type: application/json
 
 { "email": "updateuser4a@sss.com", "password": "5432" }
+
+
+# ### Set a color
+# GET http://localhost:3000/auth/colors/red
+
+# ### Get a color
+# GET http://localhost:3000/auth/colors
