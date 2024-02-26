@@ -3,10 +3,21 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
 
 {
-    "email": "createuser2@sss.com",
+    "email": "createuser21@sss.com",
     "password": "1234"
 
 }
+
+### SignIn for new user
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+    "email": "createuser21@sss.com",
+    "password": "1234"
+
+}
+
 
 # user can send request with other filds, but we reseive only what we have in entity
 
