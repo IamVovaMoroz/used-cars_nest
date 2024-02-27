@@ -21,6 +21,7 @@ export class UsersService {
 
 // }
     findOne(id: number){
+		if(!id){return null}
 		return this.repo.findOne({ where: { id } });
 		// return this.repo.findOne({email: 'asd1@gmail.com'})
 	}
