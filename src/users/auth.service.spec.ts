@@ -13,7 +13,7 @@ it('can create an instance of auth service', async () => {
 
 	const module = await Test.createTestingModule({
 		//
-		providers: [AuthService, // we check AuthService, with dependency of UsersService
+		providers: [AuthService, // we check AuthService, with dependency of UsersService. Ready
 			{
 				provide: UsersService,  // if anyone will ask UsersService
 				useValue: fakeUsersService // give them useValue - fakeUsersService, object
