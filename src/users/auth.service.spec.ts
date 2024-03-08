@@ -5,7 +5,7 @@ import { UsersService } from './users.service';
 
 it('can create an instance of auth service', async () => {
 	//create a fake copy of the users service.
-	const fakeUsersService = {
+	const fakeUsersService: Partial<UsersService>= {
 		find: () => Promise.resolve([]),
 		create: (email: string, password: string) =>
 			Promise.resolve({ id: 1, email, password }),
@@ -13,7 +13,7 @@ it('can create an instance of auth service', async () => {
 
 	const module = await Test.createTestingModule({
 		//
-		providers: [AuthService, // we check AuthService, with dependency of UsersService. Ready
+		providers: [AuthService, // we check AuthService, with dependency of UsersService.
 			{
 				provide: UsersService,  // if anyone will ask UsersService
 				useValue: fakeUsersService // give them useValue - fakeUsersService, object
