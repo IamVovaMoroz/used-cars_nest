@@ -16,6 +16,7 @@ describe('UsersController', () => {
       // remove: () => { },
       // update: () => { }
     };
+    // --------
     fakeAuthService = {
       // signup: () => { },
       // signin: () => { }
