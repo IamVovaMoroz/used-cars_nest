@@ -18,7 +18,9 @@ import { AuthGuard } from '../guards/auth.guard';
 @Serialize(UserDto)
 // @UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
-	constructor(private usersService: UsersService, private authService: AuthService) { }
+	constructor(
+		 private usersService: UsersService,
+		 private authService: AuthService) { }
 
 
 	// @Get('/colors/:color')
@@ -63,16 +65,7 @@ export class UsersController {
 	signOut(@Session() session: any) {
 		session.userId = null
 	}
-	// ........
-	// @Get('/:id')
-	// findUser(@Param('id') id: string) {
-	// 	return this.usersService.findOne(parseInt(id))
-	// }
-	// @UseInterceptors(ClassSerializerInterceptor)
-
-	// @UseInterceptors(new SerializeInterceptort(UserDto))
-	// we use decorator for that - short code now
-	// @Serialize(UserDto)
+	
 	@Get('/:id')
 	async findUser(@Param('id') id: string) {
 		console.log('handler is running')
