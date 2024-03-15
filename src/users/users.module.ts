@@ -5,7 +5,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 import { User } from './user.entity';
-import { CurrentUserInterceptor } from 'src/interceptors/serialize.inteceptor';
+import { CurrentUserInterceptor } from '../interceptors/serialize.inteceptor';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
