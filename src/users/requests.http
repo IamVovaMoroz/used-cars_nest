@@ -3,53 +3,38 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
 
 {
-    "email": "createuser21111@sss.com",
-    "password": "1234"
-
+  "email": "test@test.com",
+  "password": "12345"
 }
 
-### SignIn for new user
+### Sign in as an existing user
 POST http://localhost:3000/auth/signin
 content-type: application/json
 
 {
-    "email": "createuser21111@sss.com",
-    "password": "1234"
-
+  "email": "test@test.com",
+  "password": "12345"
 }
 
+### Get the currently signed in user
+GET http://localhost:3000/auth/whoami
 
-# user can send request with other filds, but we reseive only what we have in entity
-# ok
-### Find a user with a given ID
+### Sign out
+POST http://localhost:3000/auth/signout
 
+### Find a particular user with a given ID
 GET http://localhost:3000/auth/4
 
 ### Find all users with a given email
+GET http://localhost:3000/auth?email=asdf@asdf.com
 
-GET http://localhost:3000/auth?email=createuser2@sss.com
+### Delete a user given id
+DELETE http://localhost:3000/auth/3
 
-### Delete a user with a given email
+### Update a user
+PATCH http://localhost:3000/auth/4
+content-type: application/json
 
-DELETE http://localhost:3000/auth/15
-
-### Update a user by ID
-
-PATCH  http://localhost:3000/auth/4
-Content-Type: application/json
-
-{ "email": "updateuser4a@sss.com", "password": "5432" }
-
-### Get the currently sugned in user
-GET http://localhost:3000/auth/whoami
-
-### SignOut for user
-POST http://localhost:3000/auth/signout
-
-
-
-# ### Set a color
-# GET http://localhost:3000/auth/colors/red
-
-# ### Get a color
-# GET http://localhost:3000/auth/colors
+{
+  "password": "aaaaa"
+}

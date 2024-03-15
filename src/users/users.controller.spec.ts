@@ -29,7 +29,7 @@ describe('UsersController', () => {
     fakeAuthService = {
       // signup: () => {},
       signin: (email: string, password: string) => {
-        return Promise.resolve({id: 1, email, password} as User)
+        return Promise.resolve({ id: 1, email, password } as User);
       },
     };
 
@@ -55,7 +55,7 @@ describe('UsersController', () => {
   });
 
   it('findAllUsers returns a list of users with the given email', async () => {
-    const users = await controller.findAllUser('asdf@asdf.com');
+    const users = await controller.findAllUsers('asdf@asdf.com');
     expect(users.length).toEqual(1);
     expect(users[0].email).toEqual('asdf@asdf.com');
   });
@@ -70,16 +70,14 @@ describe('UsersController', () => {
     await expect(controller.findUser('1')).rejects.toThrow(NotFoundException);
   });
 
-  it('sign in updates session object and return user', async () => {
-  
-    const session = { userId: -10 }
-    const user = await controller.signin({ email: 'asdf@asdf.com', password: 'asdf' }, 
-    session
-    )
-expect(user.id).toEqual(1)
-expect(session.userId).toEqual(1)
+  it('signin updates session object and returns user', async () => {
+    const session = { userId: -10 };
+    const user = await controller.signin(
+      { email: 'asdf@asdf.com', password: 'asdf' },
+      session,
+    );
 
+    expect(user.id).toEqual(1);
+    expect(session.userId).toEqual(1);
   });
-
-
 });
