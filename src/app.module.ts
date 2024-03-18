@@ -35,6 +35,5 @@ export class AppModule {
       secure: false, // true in production for HTTPS
       httpOnly: true,
     }),).forRoutes('*');
-
   }
 }
