@@ -1,22 +1,31 @@
-import { NestInterceptor, ExecutionContext, CallHandler, Injectable } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import {
+	UseInterceptors,
+	NestInterceptor,
+	ExecutionContext,
+	CallHandler,
+} from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { plainToClass } from 'class-transformer';
 
+interface ClassConstructor {
+	new(...args: any[]): {};
+}
 
-@Injectable()
-export class CurrentUserInterceptor implements NestInterceptor {
+export function Serialize(dto: ClassConstructor) {
+	return UseInterceptors(new SerializeInterceptor(dto));
+}
 
-	constructor(private userService: UsersService) { }
+export class SerializeInterceptor implements NestInterceptor {
+	constructor(private dto: any) { }
 
-	async intercept(context: ExecutionContext, handler: CallHandler) {
-		const request = context.switchToHttp().getRequest()
-		const { userId } = request.session
-
-		if (userId) {
-
-			const user = await this.userService.findOne(userId)
-			request.CurrentUser = user
-		}
-
-		return handler.handle()
+	intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
+		return handler.handle().pipe(
+			map((data: any) => {
+				return plainToClass(this.dto, data, {
+					excludeExtraneousValues: true,
+				});
+			}),
+		);
 	}
 }
